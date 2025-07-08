@@ -54,7 +54,7 @@
             <x-table.th>Diunggah</x-table.th>
             <x-table.th>Tanggal Surat</x-table.th>
             <x-table.th>Tanggal Diterima</x-table.th>
-            <x-table.th>Status</x-table.th>
+            @if (Auth::user()->peran_id == 2)<x-table.th>Status</x-table.th>@endif
             <x-table.th>Aksi</x-table.th>
         </x-table.thead>
         @if (count($daftarSuratDisposisi) > 0)
@@ -74,6 +74,7 @@
                     <x-table.td>{{ $suratDisposisi->user->nama }}</x-table.td>
                     <x-table.td>{{ Carbon::parse($suratDisposisi->tanggal_surat)->translatedFormat('d F Y') }}</x-table.td>
                     <x-table.td>{{ Carbon::parse($suratDisposisi->tanggal_diterima)->translatedFormat('d F Y') }}</x-table.td>
+                      @if (Auth::user()->peran_id == 2)
                     <x-table.td>
                         @if ($suratDisposisi->diverifikasi == null)
                         <span class="text-black">Menunggu</span>
@@ -83,6 +84,7 @@
                             <span class="text-red-500">Ditolak</span>
                         @endif
                     </x-table.td>
+                    @endif
                     <x-table.td>
                         <div class="flex gap-2 flex-wrap">
                             <x-button href="{{ route('surat-disposisi.show', $suratDisposisi->id) }}">Detail</x-button>

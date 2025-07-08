@@ -54,7 +54,6 @@
             <x-table.th>Diunggah</x-table.th>
             <x-table.th>Tanggal Surat</x-table.th>
             <x-table.th>Tanggal Diterima</x-table.th>
-            <x-table.th>Status</x-table.th>
             <x-table.th>Aksi</x-table.th>
         </x-table.thead>
         @if (count($daftarSuratMasuk) > 0)
@@ -74,13 +73,6 @@
                     <x-table.td>{{ $suratMasuk->user->nama }}</x-table.td>
                     <x-table.td>{{ Carbon::parse($suratMasuk->tanggal_surat)->translatedFormat('d F Y') }}</x-table.td>
                     <x-table.td>{{ Carbon::parse($suratMasuk->tanggal_diterima)->translatedFormat('d F Y') }}</x-table.td>
-                    <x-table.td>
-                        @if ($suratMasuk->diverifikasi)
-                            <span class="text-green-500">Diverifikasi</span>
-                        @else
-                            <span class="text-red-500">Belum diverifikasi</span>
-                        @endif
-                    </x-table.td>
                     <x-table.td>
                         <div class="flex gap-2 flex-wrap">
                             <x-button href="{{ route('surat-masuk.show', $suratMasuk->id) }}">Detail</x-button>

@@ -14,8 +14,7 @@ class VerifikasiSuratController extends Controller
     public function index()
     {
         // Membuat query dasar untuk model Surat
-        $queryVerifikasiSurat = Surat::where('diverifikasi', null);
-
+        $queryVerifikasiSurat = Surat::where('diverifikasi', null)->whereIn('tipe_surat', ['Surat Keluar', 'Surat Disposisi']);
         // Filter berdasarkan parameter pencarian (jika ada)
         if (request('cari')) {
             $queryVerifikasiSurat->where(function ($query) {
@@ -37,7 +36,7 @@ class VerifikasiSuratController extends Controller
         return view('pages.verifikasi-surat.index', [
             'title' => 'Verifikasi Surat',
             'daftarVerifikasiSurat' => $daftarVerifikasiSurat,
-            'daftarTipeSurat' => ['Surat Masuk', 'Surat Keluar', 'Surat Disposisi']
+            'daftarTipeSurat' => ['Surat Keluar', 'Surat Disposisi']
         ]);
     }
 
